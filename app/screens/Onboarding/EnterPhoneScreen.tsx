@@ -2,27 +2,29 @@ import React, { FC, useEffect, useState } from "react"
 import { observer } from "mobx-react-lite"
 import { ViewStyle, TextStyle, View } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
-import { AppStackScreenProps } from "../../navigators"
+import { AuthStackScreenProps } from "../../navigators"
 import { Screen, TextField, Button } from "../../components"
 import { colors, spacing } from "../../theme"
-import { useNavigation } from "@react-navigation/native"
 import { useHeader } from "../../utils/useHeader"
 import { useStores } from "../../models"
-import { api } from "../../services/api"
+// import { api } from "../../services/api"
 
-export const EnterPhoneScreen: FC<StackScreenProps<AppStackScreenProps, "EnterPhone">> = observer(
-  function EnterPhoneScreen() {
+export const EnterPhoneScreen: FC<StackScreenProps<AuthStackScreenProps, "EnterPhone">> = observer(
+  function EnterPhoneScreen({ navigation }) {
     const [isSubmitted, setIsSubmitted] = useState(false)
 
-    const navigation = useNavigation()
-
     const {
-      authenticationStore: { authPhone, setAuthPhone, validationErrors },
+      authenticationStore: { 
+        authPhone, 
+        setAuthPhone, 
+        validationErrors 
+      },
     } = useStores()
+
 
     const errors: typeof validationErrors = isSubmitted ? validationErrors : ({} as any)
 
-    const sendOtp = async () => {
+    const sendOtp = () => {
       setIsSubmitted(true)
       if (Object.values(validationErrors).some((v) => !!v)) return
 
@@ -63,7 +65,6 @@ export const EnterPhoneScreen: FC<StackScreenProps<AppStackScreenProps, "EnterPh
             placeholderTx="enterPhoneScreen.phoneFieldPlaceholder"
             helper={errors?.authPhone}
             status={errors?.authPhone ? "error" : undefined}
-            // onSubmitEditing={() => authPasswordInput.current?.focus()}
           />
           <Button
             testID="enter-phone-button"

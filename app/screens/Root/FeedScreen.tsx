@@ -1,34 +1,41 @@
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
-import { ViewStyle } from "react-native"
+import { ViewStyle, TextStyle } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { AppStackScreenProps } from "../../navigators"
-import { Screen, Text } from "../../components"
-// import { useNavigation } from "@react-navigation/native"
+import { Screen } from "../../components"
+import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../models"
+import { useHeader } from "../../utils/useHeader"
+import { colors } from "../../theme"
 
-// STOP! READ ME FIRST!
-// To fix the TS error below, you'll need to add the following things in your navigation config:
-// - Add `Feed: undefined` to AppStackParamList
-// - Import your screen, and add it to the stack:
-//     `<Stack.Screen name="Feed" component={FeedScreen} />`
-// Hint: Look for the 🔥!
-
-// REMOVE ME! ⬇️ This TS ignore will not be necessary after you've added the correct navigator param type
-// @ts-ignore
 export const FeedScreen: FC<StackScreenProps<AppStackScreenProps, "Feed">> = observer(function FeedScreen() {
-  // Pull in one of our MST stores
-  // const { someStore, anotherStore } = useStores()
+  const navigation = useNavigation()
 
-  // Pull in navigation via hook
-  // const navigation = useNavigation()
+  useHeader({
+    title: 'Feed',
+    titleStyle: $title,
+    rightIcon: 'menu',
+    onRightPress: () => navigation.navigate('Notification'),
+  })
+
   return (
     <Screen style={$root} preset="scroll">
-      <Text text="Feed" />
     </Screen>
   )
 })
 
 const $root: ViewStyle = {
   flex: 1,
+}
+
+const $title: TextStyle = {
+  fontSize: 48,
+  fontWeight: "bold",
+  lineHeight: 72,
+  fontStyle: "normal",
+  textAlign: "left",
+  top: 0,
+  left: 0,
+  color: colors.palette.primary600
 }

@@ -19,6 +19,7 @@ import Config from "../config"
 import { useStores } from "../models" 
 import {
   WelcomeScreen,
+  NotificationScreen,
 } from "../screens"
 import { RootNavigator, RootTabParamList } from "./RootNavigator" 
 import { AuthNavigator, AuthNavigatorParamList } from "./AuthNavigator" 
@@ -42,6 +43,7 @@ export type AppStackParamList = {
   Onboarding: NavigatorScreenParams<AuthNavigatorParamList> 
   Root: NavigatorScreenParams<RootTabParamList> 
   Modal: undefined
+  Notification: undefined
   // 🔥 Your screens go here
 }
 
@@ -64,13 +66,12 @@ const AppStack = observer(function AppStack() {
     authenticationStore: { isAuthenticated },
   } = useStores()
 
-  // @demo remove-block-end
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false }}
       initialRouteName={isAuthenticated ? "Root" : "Welcome"} 
     >
-      {!isAuthenticated ? (
+      {isAuthenticated ? (
         <>
           <Stack.Screen name="Welcome" component={WelcomeScreen} />
           <Stack.Screen name="Onboarding" component={AuthNavigator} />
@@ -80,8 +81,8 @@ const AppStack = observer(function AppStack() {
           <Stack.Screen name="Root" component={RootNavigator} />
         </>
       )}
-      {/** 🔥 Your screens go here */}
       {/* <Stack.Screen name="Modal" component={ModalScreen} options={{ headerShown: false }} /> */}
+      <Stack.Screen name="Notification" component={NotificationScreen} options={{ headerShown: false }} />
     </Stack.Navigator>
   )
 })

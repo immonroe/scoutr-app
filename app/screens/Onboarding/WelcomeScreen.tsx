@@ -45,6 +45,7 @@ export const WelcomeScreen: FC<WelcomeScreenProps> = observer(function WelcomeSc
           onPress={goNext}
           style={{ backgroundColor: colors.palette.primary600 }}
         />
+        <Text style={$bottomText} text="v 1.0" preset="subheading" />
       </View>
     </View>
   )
@@ -70,6 +71,7 @@ const $bottomContainer: ViewStyle = {
   paddingHorizontal: spacing.large,
   justifyContent: "space-around",
 }
+
 const $welcomeLogo: ImageStyle = {
   height: 88,
   width: "100%",
@@ -84,4 +86,9 @@ const $welcomeHeading: TextStyle = {
 const $welcomeSubHeading: TextStyle = {
   marginBottom: spacing.large,
   textAlign: "center",
+}
+
+const $bottomText: TextStyle = {
+  textAlign: "center",
+  color: colors.palette.neutral400,
 }

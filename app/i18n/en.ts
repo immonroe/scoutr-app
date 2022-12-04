@@ -21,6 +21,9 @@ const en = {
     title: "Verify OTP",
     otpFieldLabel: "OTP",
   },
+  notificationScreen: {
+    empty: "No recent notifications",
+  },
   errorScreen: {
     title: "Something went wrong!",
     friendlySubtitle:
@@ -50,11 +53,17 @@ const en = {
     tapToSignIn: "Tap to sign in!",
     hint: "Hint: you can use any email address and your favorite password :)",
   },
-  demoNavigator: {
-    componentsTab: "Components",
-    debugTab: "Debug",
-    communityTab: "Community",
-    podcastListTab: "Podcast",
+  headers: {
+    notification: "Notifications",
+    topScoutr: "Top Scoutrs",
+    inviteFriends: "Invite Friends",
+    editProfile: "Edit Profile",
+  },
+  tabs: {
+    feed: "Feed",
+    // debugTab: "Debug",
+    // communityTab: "Community",
+    // podcastListTab: "Podcast",
   },
   demoCommunityScreen: {
     title: "Connect with the community",
