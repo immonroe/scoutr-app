@@ -10,7 +10,7 @@ import { DemoPodcastListScreen } from "../screens/DemoPodcastListScreen"
 import { colors, spacing, typography } from "../theme"
 import { AppStackParamList, AppStackScreenProps } from "./AppNavigator"
 
-export type DemoTabParamList = {
+export type RootTabParamList = {
   DemoCommunity: undefined
   DemoShowroom: { queryIndex?: string; itemIndex?: string }
   DemoDebug: undefined
@@ -22,14 +22,14 @@ export type DemoTabParamList = {
  *
  * More info: https://reactnavigation.org/docs/typescript/#organizing-types
  */
-export type DemoTabScreenProps<T extends keyof DemoTabParamList> = CompositeScreenProps<
-  BottomTabScreenProps<DemoTabParamList, T>,
+export type RootTabScreenProps<T extends keyof RootTabParamList> = CompositeScreenProps<
+  BottomTabScreenProps<RootTabParamList, T>,
   AppStackScreenProps<keyof AppStackParamList>
 >
 
-const Tab = createBottomTabNavigator<DemoTabParamList>()
+const Tab = createBottomTabNavigator<RootTabParamList>()
 
-export function DemoNavigator() {
+export function RootNavigator() {
   const { bottom } = useSafeAreaInsets()
 
   return (
@@ -98,5 +98,3 @@ const $tabBarLabel: TextStyle = {
   lineHeight: 16,
   flex: 1,
 }
-
-// @demo remove-file

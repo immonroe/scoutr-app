@@ -1,11 +1,12 @@
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
+import { api } from "../services/api"
 
 export const AuthenticationStoreModel = types
   .model("AuthenticationStore")
   .props({
     authToken: types.maybe(types.string),
-    authEmail: types.optional(types.string, ""),
-    authPassword: types.optional(types.string, ""),
+    authPhone: types.optional(types.string, ""),
+    otpCode: types.optional(types.string, ""),
   })
   .views((store) => ({
     get isAuthenticated() {
@@ -13,16 +14,15 @@ export const AuthenticationStoreModel = types
     },
     get validationErrors() {
       return {
-        authEmail: (function () {
-          if (store.authEmail.length === 0) return "can't be blank"
-          if (store.authEmail.length < 6) return "must be at least 6 characters"
-          if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(store.authEmail))
-            return "must be a valid email address"
+        authPhone: (function () {
+          if (store.authPhone.length === 0) return "can't be blank"
+          if (/^(\+0?1\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/.test(store.authPhone))
+            return "must be a valid phone number"
           return ""
         })(),
-        authPassword: (function () {
-          if (store.authPassword.length === 0) return "can't be blank"
-          if (store.authPassword.length < 6) return "must be at least 6 characters"
+        otpCode: (function () {
+          if (store.otpCode.length === 0) return "can't be blank"
+          if (store.otpCode.length !== 6) return "must be 6 digits"
           return ""
         })(),
       }
@@ -32,20 +32,17 @@ export const AuthenticationStoreModel = types
     setAuthToken(value?: string) {
       store.authToken = value
     },
-    setAuthEmail(value: string) {
-      store.authEmail = value.replace(/ /g, "")
+    async setAuthPhone(value: string) {
+      store.authPhone = value.replace(/ /g, "")
     },
-    setAuthPassword(value: string) {
-      store.authPassword = value.replace(/ /g, "")
+    async setOtpCode(value: string) {
+      store.otpCode = value.replace(/ /g, "")
     },
     logout() {
       store.authToken = undefined
-      store.authEmail = ""
-      store.authPassword = ""
+      store.authPhone = ""
     },
   }))
 
 export interface AuthenticationStore extends Instance<typeof AuthenticationStoreModel> {}
 export interface AuthenticationStoreSnapshot extends SnapshotOut<typeof AuthenticationStoreModel> {}
-
-// @demo remove-file
