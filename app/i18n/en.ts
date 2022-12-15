@@ -3,14 +3,26 @@ const en = {
     ok: "OK!",
     cancel: "Cancel",
     back: "Back",
-    logOut: "Log Out", // @demo remove-current-line
+    logOut: "Log Out",
+    title: 'Scoutr',
+    nextBtn: 'Next',
+    change: 'Change',
   },
   welcomeScreen: {
-    postscript:
-      "psst  — This probably isn't what your app looks like. (Unless your designer handed you these screens, and in that case, ship it!)",
-    readyForLaunch: "Your app, almost ready for launch!",
-    exciting: "(ohh, this is exciting!)",
-    letsGo: "Let's go!", // @demo remove-current-line
+    slogan: '2k park in real life',
+    button: 'Continue',
+  },
+  enterPhoneScreen: {
+    title: "Phone Number.",
+    phoneFieldLabel: "Phone Number",
+    phoneFieldPlaceholder: "Enter your phone number",
+  },
+  verifyOtpScreen: {
+    title: "Verify OTP",
+    otpFieldLabel: "OTP",
+  },
+  notificationScreen: {
+    empty: "No recent notifications",
   },
   errorScreen: {
     title: "Something went wrong!",
@@ -41,11 +53,17 @@ const en = {
     tapToSignIn: "Tap to sign in!",
     hint: "Hint: you can use any email address and your favorite password :)",
   },
-  demoNavigator: {
-    componentsTab: "Components",
-    debugTab: "Debug",
-    communityTab: "Community",
-    podcastListTab: "Podcast",
+  headers: {
+    notification: "Notifications",
+    topScoutr: "Top Scoutrs",
+    inviteFriends: "Invite Friends",
+    editProfile: "Edit Profile",
+  },
+  tabs: {
+    feed: "Feed",
+    // debugTab: "Debug",
+    // communityTab: "Community",
+    // podcastListTab: "Podcast",
   },
   demoCommunityScreen: {
     title: "Connect with the community",

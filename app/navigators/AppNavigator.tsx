@@ -8,7 +8,7 @@ import {
   DarkTheme,
   DefaultTheme,
   NavigationContainer,
-  NavigatorScreenParams, // @demo remove-current-line
+  NavigatorScreenParams, 
 } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { StackScreenProps } from "@react-navigation/stack"
@@ -16,12 +16,13 @@ import { observer } from "mobx-react-lite"
 import React from "react"
 import { useColorScheme } from "react-native"
 import Config from "../config"
-import { useStores } from "../models" // @demo remove-current-line
+import { useStores } from "../models" 
 import {
-  LoginScreen, // @demo remove-current-line
   WelcomeScreen,
+  NotificationScreen,
 } from "../screens"
-import { DemoNavigator, DemoTabParamList } from "./DemoNavigator" // @demo remove-current-line
+import { RootNavigator, RootTabParamList } from "./RootNavigator" 
+import { AuthNavigator, AuthNavigatorParamList } from "./AuthNavigator" 
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 
 /**
@@ -39,8 +40,10 @@ import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
  */
 export type AppStackParamList = {
   Welcome: undefined
-  Login: undefined // @demo remove-current-line
-  Demo: NavigatorScreenParams<DemoTabParamList> // @demo remove-current-line
+  Onboarding: NavigatorScreenParams<AuthNavigatorParamList> 
+  Root: NavigatorScreenParams<RootTabParamList> 
+  Modal: undefined
+  Notification: undefined
   // 🔥 Your screens go here
 }
 
@@ -59,32 +62,27 @@ export type AppStackScreenProps<T extends keyof AppStackParamList> = StackScreen
 const Stack = createNativeStackNavigator<AppStackParamList>()
 
 const AppStack = observer(function AppStack() {
-  // @demo remove-block-start
   const {
     authenticationStore: { isAuthenticated },
   } = useStores()
 
-  // @demo remove-block-end
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false }}
-      initialRouteName={isAuthenticated ? "Welcome" : "Login"} // @demo remove-current-line
+      initialRouteName={isAuthenticated ? "Root" : "Welcome"} 
     >
-      {/* @demo remove-block-start */}
-      {isAuthenticated ? (
+      {!isAuthenticated ? (
         <>
-          {/* @demo remove-block-end */}
           <Stack.Screen name="Welcome" component={WelcomeScreen} />
-          {/* @demo remove-block-start */}
-          <Stack.Screen name="Demo" component={DemoNavigator} />
+          <Stack.Screen name="Onboarding" component={AuthNavigator} />
         </>
       ) : (
         <>
-          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Root" component={RootNavigator} />
         </>
       )}
-      {/* @demo remove-block-end */}
-      {/** 🔥 Your screens go here */}
+      {/* <Stack.Screen name="Modal" component={ModalScreen} options={{ headerShown: false }} /> */}
+      <Stack.Screen name="Notification" component={NotificationScreen} options={{ headerShown: false }} />
     </Stack.Navigator>
   )
 })
