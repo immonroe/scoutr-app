@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from "react"
 import { observer } from "mobx-react-lite"
-import { ViewStyle, View, TextStyle } from "react-native"
+import { ViewStyle, View, TextStyle, Pressable } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { AppStackScreenProps } from "../../navigators"
 import { Screen, TextField, Button, Text } from "../../components"
@@ -45,7 +45,9 @@ export const VerifyOtpScreen: FC<StackScreenProps<AppStackScreenProps, "VerifyOt
     navigation.navigate("Root", { screen: "Feed" })
   }
 
-
+  const onChangePress = () => {
+    navigation.goBack()
+  }
 
   useEffect(() => {
     return () => {
@@ -58,7 +60,9 @@ export const VerifyOtpScreen: FC<StackScreenProps<AppStackScreenProps, "VerifyOt
     <View style={$content}>
       <View style={$row}>
         <Text text={authPhone} style={$label} />
-        <Text tx="common.change" style={$highlight} />
+        <Pressable onPress={onChangePress}>
+          <Text tx="common.change" style={$highlight} />
+        </Pressable>
       </View>
       <TextField
         value={otpCode}
@@ -115,8 +119,9 @@ const $content: ViewStyle = {
 
 const $row: ViewStyle = {
   flexDirection: "row",
-  justifyContent: "center",
+  justifyContent: "space-evenly",
   alignItems: "center",
+  marginBottom: spacing.extraSmall,
 }
 
 const $label: TextStyle = {

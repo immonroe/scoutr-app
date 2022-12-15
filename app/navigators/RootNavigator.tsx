@@ -45,8 +45,9 @@ export function RootNavigator() {
         name="Feed"
         component={FeedScreen}
         options={{
-          tabBarLabel: translate("tabs.feed"),
-          tabBarIcon: ({ focused }) => <Icon icon="community" color={focused && colors.tint} />,
+          // tabBarLabel: translate("tabs.feed"),
+          tabBarShowLabel: false,
+          tabBarIcon: ({ focused }) => <Icon icon="community" size={30} color={focused && colors.tint} />,
         }}
       />
 

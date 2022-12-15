@@ -46,6 +46,14 @@ export interface ApiFeedResponse extends Response {
   }
 }
 
+export interface NotifcationsResponse extends Response {
+  data: {
+    id: string
+    title: string
+    body: string
+  }[]
+}
+
 /**
  * The options used to configure apisauce.
  */

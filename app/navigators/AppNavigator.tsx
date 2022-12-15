@@ -71,7 +71,7 @@ const AppStack = observer(function AppStack() {
       screenOptions={{ headerShown: false }}
       initialRouteName={isAuthenticated ? "Root" : "Welcome"} 
     >
-      {isAuthenticated ? (
+      {!isAuthenticated ? (
         <>
           <Stack.Screen name="Welcome" component={WelcomeScreen} />
           <Stack.Screen name="Onboarding" component={AuthNavigator} />

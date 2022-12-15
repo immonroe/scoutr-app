@@ -1,10 +1,7 @@
 import { observer } from "mobx-react-lite"
 import React, { FC } from "react"
 import { Image, ImageStyle, TextStyle, View, ViewStyle } from "react-native"
-import {
-  Button, 
-  Text,
-} from "../../components"
+import { Button, Text } from "../../components"
 import { AppStackScreenProps } from "../../navigators" 
 import { colors, spacing } from "../../theme"
 import { useSafeAreaInsetsStyle } from "../../utils/useSafeAreaInsetsStyle"
@@ -41,7 +38,7 @@ export const WelcomeScreen: FC<WelcomeScreenProps> = observer(function WelcomeSc
         <Button
           testID="next-screen-button"
           preset="reversed"
-          tx="welcomeScreen.button"
+          tx="common.continue"
           onPress={goNext}
           style={{ backgroundColor: colors.palette.primary600 }}
         />
